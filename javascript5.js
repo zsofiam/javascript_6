@@ -209,7 +209,7 @@ document.getElementById("form1").onsubmit = function (event) {
  * szorgalmi: számológép forma
  */
 
-document.getElementById("szamologep").onsubmit = function (e) {
+/* document.getElementById("szamologep").onsubmit = function (e) {
 
     e.preventDefault();
 
@@ -239,6 +239,39 @@ document.getElementById("szamologep").onsubmit = function (e) {
 
     document.getElementById("box6").firstChild.innerText = result;
 
+} */
+
+
+//az if elágazásokat így tudjuk kiküszöbölni:
+
+var calculator = {
+    mult: function(a,b){
+        return a*b;
+    },
+    div: function(a,b){
+        return a/b;
+    },
+    add: function(a,b){
+        return a+b;
+    },
+    subtr: function(a,b){
+        return a-b;
+    }
+};
+
+
+document.getElementById("szamologep").onsubmit = function (e) {
+
+    e.preventDefault();
+
+    var operandus1 = parseInt(getTargetVal(e, "operandus1"));
+    var operandus2 = parseInt(getTargetVal(e, "operandus2"));
+
+
+    var operator = getTargetVal(e, "operator");
+
+    
+
+    document.getElementById("box6").firstChild.innerText = calculator[operator](operandus1,operandus2);
+
 }
-
-
