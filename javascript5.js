@@ -245,17 +245,17 @@ document.getElementById("form1").onsubmit = function (event) {
 //az if elágazásokat így tudjuk kiküszöbölni:
 
 var calculator = {
-    mult: function(a,b){
-        return a*b;
+    mult: function (a, b) {
+        return a * b;
     },
-    div: function(a,b){
-        return a/b;
+    div: function (a, b) {
+        return a / b;
     },
-    add: function(a,b){
-        return a+b;
+    add: function (a, b) {
+        return a + b;
     },
-    subtr: function(a,b){
-        return a-b;
+    subtr: function (a, b) {
+        return a - b;
     }
 };
 
@@ -270,8 +270,171 @@ document.getElementById("szamologep").onsubmit = function (e) {
 
     var operator = getTargetVal(e, "operator");
 
-    
 
-    document.getElementById("box6").firstChild.innerText = calculator[operator](operandus1,operandus2);
+
+    document.getElementById("box6").firstChild.innerText = calculator[operator](operandus1, operandus2);
 
 }
+
+/**
+ * Újabb for ciklus
+ * 
+ * tomb = [1, 2, 3, 4];
+ * 
+ * for (var i in tomb){
+ * tomb[i]
+ * }
+ * 
+ * for (t of tomb){
+ * t
+ * }
+ */
+
+var cars = ["Audi", "BMW", "zsiguli"];
+
+for (car of cars) {
+    console.log(car);
+}
+
+for (var i in cars) {
+    console.log(cars[i]);
+}
+
+var products = [
+
+    {
+        name: "kézigyalu",
+        price: 4000,
+        inStock: true
+    },
+    {
+        name: "kalapács",
+        price: 1500,
+        inStock: false
+    },
+    {
+
+        name: "fűrész",
+        price: 3400,
+        inStock: true
+    },
+    {
+
+        name: "szög",
+        price: 12000,
+        inStock: false
+    },
+
+];
+
+//csak, ami elérhető
+
+var filteredProducts = [];
+
+for (product of products) {
+    if (product.inStock) {
+        filteredProducts.push(product);
+    }
+}
+
+console.log(filteredProducts);
+
+/**
+ * 
+ * Map
+ * 
+ * Egy tömbbe gyűjtsük össze azon termékek árait, amelyek készleten vannak
+ * 
+ */
+
+var prices = [];
+
+//var prices = new Array();
+
+for (fp of filteredProducts) {
+    prices.push(fp.price);
+}
+
+console.log(prices);
+
+
+function isInStock(p){
+return p.inStock;
+}
+
+products.filter(isInStock);
+
+console.log("<----------------filter------------------>");
+
+var pf = products.filter(function (p){
+    return p.inStock;
+});
+
+console.log(pf);
+
+function priceMap(p){
+    return p.price;
+}
+
+prices = products.map(priceMap);
+
+console.log("<-------map------>");
+
+console.log(prices);
+
+function myMap(t, fn) {
+
+    var m = [];
+
+    for (te of t) {
+        m.push(fn(te));
+    }
+    return m;
+}
+
+// felüldefiniálhatjuk az array metódusait a következő módon
+
+Array.prototype.myMap = function (fn) {
+    var m = [];
+    for (te of this) {
+        m.push(fn(te));
+    }
+    return m;
+}
+
+function myMapPrices(tombelem){
+    return tombelem.price;
+}
+
+var rest = myMap(products, myMapPrices);
+
+console.log("<---------------My map------------->");
+
+console.log(rest);
+
+console.log("<---------------End my map------------->");
+/**
+ * 
+ * maxár products-ok közül
+ * 
+ * aggregálás
+ */
+
+var maxPrice = 0;
+
+
+function maxAr() {
+
+
+
+    for (product of products) {
+        if (product.price > maxPrice) {
+            maxPrice = product.price;
+        }
+    }
+    return maxPrice;
+
+}
+
+console.log(maxPrice);
+
