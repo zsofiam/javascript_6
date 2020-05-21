@@ -209,16 +209,16 @@ document.getElementById("form1").onsubmit = function (event) {
  * szorgalmi: számológép forma
  */
 
-document.getElementById("szamologep").onsubmit = function (event) {
+document.getElementById("szamologep").onsubmit = function (e) {
 
-    event.preventDefault();
+    e.preventDefault();
 
-    var operandus1 = getTargetVal(event, "operandus1");
-    var operandus2 = getTargetVal(event, "operandus2");
+    var operandus1 = parseInt(getTargetVal(e, "operandus1"));
+    var operandus2 = parseInt(getTargetVal(e, "operandus2"));
 
     var result;
 
-    var operator = getTargetVal(event, "operator");
+    var operator = getTargetVal(e, "operator");
 
     switch (operator) {
         case 'mult':
@@ -228,7 +228,7 @@ document.getElementById("szamologep").onsubmit = function (event) {
             result = operandus1 / operandus2;
             break;
         case 'add':
-            result = parseInt(operandus1) + parseInt(operandus2);
+            result = operandus1 + operandus2;
             break;
         case 'subtr':
             result = operandus1 - operandus2;
